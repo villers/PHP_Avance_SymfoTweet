@@ -1,0 +1,9 @@
+services:
+#    quiz_user.example:
+#        class: Twit\UserBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+    acme.user.login:
+        class: Twit\UserBundle\EventListener\LoginListener
+        arguments: [@security.context, @doctrine.orm.entity_manager]
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onLoad }

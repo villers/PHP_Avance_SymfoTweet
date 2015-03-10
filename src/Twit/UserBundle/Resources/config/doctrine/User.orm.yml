@@ -1,0 +1,22 @@
+Twit\UserBundle\Entity\User:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        ip:
+            type: string
+            length: 255
+            nullable: true
+        agent:
+            type: string
+            length: 255
+            nullable: true
+        visite:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks: {  }

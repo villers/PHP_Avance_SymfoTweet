@@ -1,0 +1,7 @@
+quiz_app:
+    resource: "@TwitAppBundle/Resources/config/routing.yml"
+    prefix:   /
+
+quiz_user:
+    resource: "@TwitUserBundle/Resources/config/routing.yml"
+    prefix:   /user

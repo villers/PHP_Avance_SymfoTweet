@@ -1,0 +1,4 @@
+services:
+#    quiz_app.example:
+#        class: Twit\AppBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
