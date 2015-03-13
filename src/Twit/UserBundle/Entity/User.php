@@ -4,31 +4,18 @@ namespace Twit\UserBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
-/**
- * User
- */
 class User extends BaseUser
 {
-    /**
-     * @var integer
-     */
+
     protected $id;
 
-    /**
-     * @var string
-     */
-    protected $ip;
+    protected $twitter_id;
 
-    /**
-     * @var string
-     */
-    protected $agent;
+    protected $twitter_access_token;
 
-    /**
-     * @var \DateTime
-     */
-    protected $visite;
+   
 
     /**
      * Get id
@@ -41,75 +28,48 @@ class User extends BaseUser
     }
 
     /**
-     * Set ip
+     * Set twitter_id
      *
-     * @param string $ip
+     * @param string $twitterId
      * @return User
      */
-    public function setIp($ip)
+    public function setTwitterId($twitterId)
     {
-        $this->ip = $ip;
+        $this->twitter_id = $twitterId;
 
         return $this;
     }
 
     /**
-     * Get ip
+     * Get twitter_id
      *
      * @return string 
      */
-    public function getIp()
+    public function getTwitterId()
     {
-        return $this->ip;
+        return $this->twitter_id;
     }
 
     /**
-     * Set agent
+     * Set twitter_access_token
      *
-     * @param string $agent
+     * @param string $twitterAccessToken
      * @return User
      */
-    public function setAgent($agent)
+    public function setTwitterAccessToken($twitterAccessToken)
     {
-        $this->agent = $agent;
+        $this->twitter_access_token = $twitterAccessToken;
 
         return $this;
     }
 
     /**
-     * Get agent
+     * Get twitter_access_token
      *
      * @return string 
      */
-    public function getAgent()
+    public function getTwitterAccessToken()
     {
-        return $this->agent;
-    }
-
-    /**
-     * Set visite
-     *
-     * @param \DateTime $visite
-     * @return User
-     */
-    public function setVisite($visite)
-    {
-        $this->visite = $visite;
-
-        return $this;
-    }
-
-    /**
-     * Get visite
-     *
-     * @return \DateTime 
-     */
-    public function getVisite()
-    {
-        return $this->visite;
-    }
-
-    public function __toString(){
-        return $this->getUsername();
+        return $this->twitter_access_token;
     }
 }

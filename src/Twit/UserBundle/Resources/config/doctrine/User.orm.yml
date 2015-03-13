@@ -8,15 +8,12 @@ Twit\UserBundle\Entity\User:
             generator:
                 strategy: AUTO
     fields:
-        ip:
+        twitter_id:
             type: string
             length: 255
             nullable: true
-        agent:
+        twitter_access_token:
             type: string
             length: 255
-            nullable: true
-        visite:
-            type: datetime
             nullable: true
     lifecycleCallbacks: {  }

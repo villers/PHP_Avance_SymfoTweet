@@ -1,2 +1,18 @@
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+
+hwi_oauth_security:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix: /
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix: /
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /
+
+facebook_login:
+    pattern: /check-twitter
