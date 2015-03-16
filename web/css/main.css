@@ -1,0 +1,32 @@
+.list-none {
+  list-style: none;
+}
+.fb-profile img.fb-image-lg {
+  z-index: 0;
+  width: 100%;
+  margin-bottom: 10px;
+  float: left;
+}
+.fb-image-profile {
+  margin: -90px 10px 0px 50px;
+  z-index: 100;
+  width: 20%;
+  float: left;
+}
+.fb-profile-text {
+  float: left;
+}
+.subinfo {
+  clear: both;
+  margin-left: 50px;
+}
+h3 em {
+  font-weight: lighter;
+  font-size: smaller;
+}
+.panelfollow {
+  margin-left: 100px;
+}
+.table-striped {
+  width: 500px;
+}

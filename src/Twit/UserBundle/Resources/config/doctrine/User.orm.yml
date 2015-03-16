@@ -16,4 +16,8 @@ Twit\UserBundle\Entity\User:
             type: string
             length: 255
             nullable: true
+        twitter_secret_token:
+            type: string
+            length: 255
+            nullable: true
     lifecycleCallbacks: {  }

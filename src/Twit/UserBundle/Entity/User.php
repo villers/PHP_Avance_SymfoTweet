@@ -15,6 +15,7 @@ class User extends BaseUser
 
     protected $twitter_access_token;
 
+    protected $twitter_secret_token;
    
 
     /**
@@ -71,5 +72,28 @@ class User extends BaseUser
     public function getTwitterAccessToken()
     {
         return $this->twitter_access_token;
+    }
+
+    /**
+     * Set twitter_secret_token
+     *
+     * @param string $twitterSecretToken
+     * @return User
+     */
+    public function setTwitterSecretToken($twitterSecretToken)
+    {
+        $this->twitter_secret_token = $twitterSecretToken;
+
+        return $this;
+    }
+
+    /**
+     * Get twitter_secret_token
+     *
+     * @return string 
+     */
+    public function getTwitterSecretToken()
+    {
+        return $this->twitter_secret_token;
     }
 }

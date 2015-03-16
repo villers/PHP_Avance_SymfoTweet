@@ -29,17 +29,20 @@ class FOSUBUserProvider extends BaseClass
         $setter = 'set'.ucfirst($service);
         $setter_id = $setter.'Id';
         $setter_token = $setter.'AccessToken';
+        $setter_secret_token = $setter.'SecretToken';
 
         //we "disconnect" previously connected users
         if (null !== $previousUser = $this->userManager->findUserBy(array($property => $username))) {
             $previousUser->$setter_id(null);
             $previousUser->$setter_token(null);
+            $previousUser->$setter_secret_token(null);
             $this->userManager->updateUser($previousUser);
         }
 
         //we connect current user
         $user->$setter_id($username);
         $user->$setter_token($response->getAccessToken());
+        $user->$setter_secret_token($response->getTokenSecret());
 
         $this->userManager->updateUser($user);
     }
@@ -57,10 +60,12 @@ class FOSUBUserProvider extends BaseClass
             $setter = 'set'.ucfirst($service);
             $setter_id = $setter.'Id';
             $setter_token = $setter.'AccessToken';
+            $setter_secret_token = $setter.'SecretToken';
             // create new user here
             $user = $this->userManager->createUser();
             $user->$setter_id($username);
             $user->$setter_token($response->getAccessToken());
+            $user->$setter_secret_token($response->getTokenSecret());
             //I have set all requested data with the user's username
             //modify here with relevant data
             $user->setUsername($username);

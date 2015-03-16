@@ -7,6 +7,8 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet" media="screen">
+
 </head>
 <body>
 <nav class="navbar navbar-default" role="navigation">
@@ -36,6 +38,7 @@
                 {% else %}
                     <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
                     <li><a href="{{ path('fos_user_registration_register') }}">Inscription</a></li>
+                    <li><a href="{{ path('hwi_oauth_service_redirect', {service: 'twitter'}) }}">By Twitter</a></li>
                 {% endif %}
             </ul>
         </div>
@@ -54,6 +57,9 @@
 
     {% block body %}{% endblock %}
     {% block javascripts %}{% endblock %}
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
 </div>
 </body>
 </html>

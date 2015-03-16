@@ -118,7 +118,7 @@ hwi_oauth:
     resource_owners:
         twitter:
             type:                twitter
-            client_id:           DcX3R4xfC37lJfwqZTiJjL6WW
-            client_secret:       eAzdTl9fq5C2liqNeQ79f0syvbGwcq712JUMqChe8SP7OkWL3N
+            client_id:           "%client_id%"
+            client_secret:       "%client_secret%"
 
     # here you will add one (or more) configurations for resource owners

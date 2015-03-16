@@ -18,9 +18,11 @@ use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Abraham\TwitterOAuth\TwitterOAuth;
 
 /**
  * Controller managing the user profile
@@ -35,13 +37,29 @@ class ProfileController extends Controller
     public function showAction()
     {
         $user = $this->getUser();
+        $statues = null;
+        $friends = null;
+        $followers = null;
+        $favorites = null;
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        return $this->render('FOSUserBundle:Profile:show.html.twig', array(
-            'user' => $user
-        ));
+        $client_id = $this->container->getParameter('client_id');
+        $client_secret = $this->container->getParameter('client_secret');
+
+        if(!is_null($user->getTwitterId())){
+            $connection = new TwitterOAuth($client_id, $client_secret, $user->getTwitterAccessToken(), $user->getTwitterSecretToken());
+            $statues = $connection->get("users/show", ['user_id'=> $user->getTwitterId()]);
+            $statues->profile_image_url = str_replace("_normal.jpeg", ".jpeg", $statues->profile_image_url);
+
+            $friends = $connection->get("friends/list", ['user_id'=> $user->getTwitterId(), 'count' => 200]);
+            $followers = $connection->get("followers/list", ['user_id'=> $user->getTwitterId(), 'count' => 200]);
+            $favorites = $connection->get("favorites/list", ['user_id'=> $user->getTwitterId(), 'count' => 200]);
+            //return new JsonResponse($favorites);
+        }
+
+        return $this->render('FOSUserBundle:Profile:show.html.twig', compact("user", 'statues', 'friends','followers', 'favorites'));
     }
 
     /**

@@ -1,5 +1,104 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
+    <h2>Site informations</h2>
 {% include "FOSUserBundle:Profile:show_content.html.twig" %}
+
+    <hr/>
+    {% if statues is null %}
+        <a href="{{ path('hwi_oauth_service_redirect', {service: 'twitter'}) }}">Lier mon compte a twitter</a>
+    {% else %}
+    <h2>Twitter informations</h2>
+    <div class="container">
+        <div class="fb-profile">
+            <img class="fb-image-lg" src="{{ statues.profile_banner_url }}" alt="Profile background"/>
+            <img class="fb-image-profile thumbnail" src="{{ statues.profile_image_url }}" alt="Profile image"/>
+            <div class="subinfo pull-left">
+                <h3>{{ statues.name }}<br/><em>@<a href="https://twitter.com/{{ statues.screen_name }}">{{ statues.screen_name }}</a></em></h3>
+                <p>{{ statues.description }}</p>
+                <p>{{ statues.location }}</p>
+                <a href="{{ statues.entities.url.urls[0].expanded_url }}">{{ statues.entities.url.urls[0].display_url }}</a>
+            </div>
+            <div class="fb-profile-text row pull-right">
+                <div class="panelfollow" role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li role="presentation" class="active"><a href="#tweet" aria-controls="tweet" role="tab" data-toggle="tab">Tweets {{ statues.statuses_count }}</a></li>
+                        <li role="presentation"><a href="#abo" aria-controls="abo" role="tab" data-toggle="tab">Abonnements {{ statues.friends_count }}</a></li>
+                        <li role="presentation"><a href="#abonne" aria-controls="abonne" role="tab" data-toggle="tab">Abonnés {{  statues.followers_count }}</a></li>
+                        <li role="presentation"><a href="#fav" aria-controls="fav" role="tab" data-toggle="tab">Favoris {{ statues.favourites_count }}</a></li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="tweet">tweet</div>
+                        <div role="tabpanel" class="tab-pane" id="abo">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Photos</th>
+                                    <th>Name</th>
+                                    <th>Pseudo</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for user in friends.users %}
+                                    <tr>
+                                        <th scope="row">{{ loop.index }}</th>
+                                        <td><img class="b-image-profile thumbnail" src="{{ user.profile_image_url }}" alt="{{ user.screen_name }}"/></td>
+                                        <td>{{ user.name }}</td>
+                                        <td>@<a href="https://twitter.com/{{ statues.screen_name }}">{{ user.screen_name }}</a></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="abonne">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Photos</th>
+                                        <th>Name</th>
+                                        <th>Pseudo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for user in followers.users %}
+                                        <tr>
+                                            <th scope="row">{{ loop.index }}</th>
+                                            <td><img class="b-image-profile thumbnail" src="{{ user.profile_image_url }}" alt="{{ user.screen_name }}"/></td>
+                                            <td>{{ user.name }}</td>
+                                            <td>@<a href="https://twitter.com/{{ statues.screen_name }}">{{ user.screen_name }}</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="fav">
+                            <table class="table table-striped">
+                                <tbody>
+                                    {% for favorie in favorites %}
+                                        <tr>
+                                            <td><img class="b-image-profile thumbnail" src="{{ favorie.user.profile_image_url }}" alt="{{ favorie.user.screen_name }}"/></td>
+                                            <td>
+                                                <h3>{{ favorie.user.name }}</h3>
+                                                <em>@<a href="https://twitter.com/{{ favorie.user.screen_name }}">{{ favorie.user.screen_name }}</a></em>
+                                                <p>{{ favorie.text }}</p>
+                                                <p>{{ favorie.source | raw }}</p>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
 {% endblock fos_user_content %}
