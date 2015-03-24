@@ -18,3 +18,6 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    client_id: DcX3R4xfC37lJfwqZTiJjL6WW
+    client_secret: eAzdTl9fq5C2liqNeQ79f0syvbGwcq712JUMqChe8SP7OkWL3N

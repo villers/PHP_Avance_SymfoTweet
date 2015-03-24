@@ -1,0 +1,30 @@
+wall:
+    path:     /
+    defaults: { _controller: "TwitAppBundle:Wall:index" }
+
+wall_show:
+    path:     /{id}/show
+    defaults: { _controller: "TwitAppBundle:Wall:show" }
+
+wall_new:
+    path:     /new
+    defaults: { _controller: "TwitAppBundle:Wall:new" }
+
+wall_create:
+    path:     /create
+    defaults: { _controller: "TwitAppBundle:Wall:create" }
+    methods:  POST
+
+wall_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "TwitAppBundle:Wall:edit" }
+
+wall_update:
+    path:     /{id}/update
+    defaults: { _controller: "TwitAppBundle:Wall:update" }
+    methods:  [POST, PUT]
+
+wall_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "TwitAppBundle:Wall:delete" }
+    methods:  [POST, DELETE]

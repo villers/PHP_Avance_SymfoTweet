@@ -1,3 +1,19 @@
+twit_app_wall:
+    resource: "@TwitAppBundle/Resources/config/routing/wall.yml"
+    prefix:   /wall
+
 twit_app_homepage:
     path:     /
     defaults: { _controller: TwitAppBundle:Default:index }
+
+twit_app_wall_homepage:
+    path:     /wall
+    defaults: { _controller: TwitAppBundle:Wall:index }
+
+twit_app_wall_create:
+    path:     /wall/create
+    defaults: { _controller: TwitAppBundle:Wall:create }
+
+twit_app_lang:
+    path:     /lang
+    defaults: { _controller: TwitAppBundle:Default:switchLang }

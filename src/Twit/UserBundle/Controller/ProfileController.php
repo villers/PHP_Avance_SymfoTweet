@@ -38,6 +38,7 @@ class ProfileController extends Controller
     {
         $user = $this->getUser();
         $statues = null;
+        $user_timeline = null;
         $friends = null;
         $followers = null;
         $favorites = null;
@@ -53,13 +54,15 @@ class ProfileController extends Controller
             $statues = $connection->get("users/show", ['user_id'=> $user->getTwitterId()]);
             $statues->profile_image_url = str_replace("_normal.jpeg", ".jpeg", $statues->profile_image_url);
 
+            $user_timeline = $connection->get("statuses/user_timeline", ['user_id'=> $user->getTwitterId(), 'count' => 200]);
+
             $friends = $connection->get("friends/list", ['user_id'=> $user->getTwitterId(), 'count' => 200]);
             $followers = $connection->get("followers/list", ['user_id'=> $user->getTwitterId(), 'count' => 200]);
             $favorites = $connection->get("favorites/list", ['user_id'=> $user->getTwitterId(), 'count' => 200]);
-            //return new JsonResponse($favorites);
+            //return new JsonResponse($user_timeline);
         }
 
-        return $this->render('FOSUserBundle:Profile:show.html.twig', compact("user", 'statues', 'friends','followers', 'favorites'));
+        return $this->render('FOSUserBundle:Profile:show.html.twig', compact("user", 'statues', 'user_timeline', 'friends','followers', 'favorites'));
     }
 
     /**

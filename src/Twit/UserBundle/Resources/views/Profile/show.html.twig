@@ -31,7 +31,23 @@
 
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="tweet">tweet</div>
+                        <div role="tabpanel" class="tab-pane active" id="tweet">
+                            <table class="table table-striped">
+                                <tbody>
+                                {% for timeline in user_timeline %}
+                                    <tr>
+                                        <td><img class="b-image-profile thumbnail" src="{{ timeline.user.profile_image_url }}" alt="{{ timeline.user.screen_name }}"/></td>
+                                        <td>
+                                            <h3>{{ timeline.user.name }}</h3>
+                                            <em>@<a href="https://twitter.com/{{ timeline.user.screen_name }}">{{ timeline.user.screen_name }}</a></em>
+                                            <p>{{ timeline.text }}</p>
+                                            <p>{{ timeline.source | raw }}</p>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                         <div role="tabpanel" class="tab-pane" id="abo">
                             <table class="table table-striped">
                                 <thead>

@@ -1,0 +1,24 @@
+Twit\AppBundle\Entity\Wall:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        type:
+            type: integer
+        value:
+            type: string
+            length: 255
+        moderate:
+            type: integer
+    manyToOne:
+        user:
+            targetEntity: \Twit\UserBundle\Entity\User
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

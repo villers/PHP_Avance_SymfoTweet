@@ -1,7 +1,11 @@
-quiz_app:
+quiz_app_fr:
     resource: "@TwitAppBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /{_locale}/
+    requirements:
+        _locale: |en|fr
 
 quiz_user:
     resource: "@TwitUserBundle/Resources/config/routing.yml"
-    prefix:   /user
+    prefix:   /{_locale}/user
+    requirements:
+        _locale: |en|fr
