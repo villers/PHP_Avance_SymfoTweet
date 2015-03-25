@@ -13,7 +13,3 @@ twit_app_wall_homepage:
 twit_app_wall_create:
     path:     /wall/create
     defaults: { _controller: TwitAppBundle:Wall:create }
-
-twit_app_lang:
-    path:     /lang
-    defaults: { _controller: TwitAppBundle:Default:switchLang }

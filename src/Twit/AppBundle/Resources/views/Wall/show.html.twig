@@ -37,4 +37,33 @@
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
+
+    {{ dump(search) }}
+    <table class="table table-striped">
+        <tbody>
+        {% if search.statuses is defined %}
+            {% for row in search.statuses %}
+                <tr>
+                    <td><img class="b-image-profile thumbnail" src="{{ row.user.profile_image_url }}" alt="{{ row.user.screen_name }}"/></td>
+                    <td>
+                        <h3>{{ row.user.name }}</h3>
+                        <em>@<a href="https://twitter.com/{{ row.user.screen_name }}">{{ row.user.screen_name }}</a></em>
+                        <p>{{ row.text }}</p>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            {% for row in search %}
+                <tr>
+                    <td><img class="b-image-profile thumbnail" src="{{ row.user.profile_image_url }}" alt="{{ row.user.screen_name }}"/></td>
+                    <td>
+                        <h3>{{ row.user.name }}</h3>
+                        <em>@<a href="https://twitter.com/{{ row.user.screen_name }}">{{ row.user.screen_name }}</a></em>
+                        <p>{{ row.text }}</p>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
 {% endblock %}

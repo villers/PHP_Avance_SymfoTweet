@@ -12,27 +12,27 @@ class Wall
     /**
      * @var integer
      */
-    private $id;
+    protected $id;
 
     /**
      * @var integer
      */
-    private $type;
+    protected $type;
 
     /**
      * @var string
      */
-    private $value;
+    protected $value;
 
     /**
      * @var integer
      */
-    private $moderate;
+    protected $moderate;
 
     /**
      * @var \Twit\UserBundle\Entity\User
      */
-    private $user;
+    protected $user;
 
 
     /**

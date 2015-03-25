@@ -2,6 +2,7 @@
 
 namespace Twit\AppBundle\Controller;
 
+use Abraham\TwitterOAuth\TwitterOAuth;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -94,7 +95,9 @@ class WallController extends Controller
      */
     public function showAction($id)
     {
+        $search = "";
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
 
         $entity = $em->getRepository('TwitAppBundle:Wall')->find($id);
 
@@ -104,9 +107,27 @@ class WallController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
+        $client_id = $this->container->getParameter('client_id');
+        $client_secret = $this->container->getParameter('client_secret');
+        if(!is_null($user->getTwitterId())) {
+            $connection = new TwitterOAuth($client_id, $client_secret, $user->getTwitterAccessToken(), $user->getTwitterSecretToken());
+            switch($entity->getType()){
+                case 1: // mot clee
+                    $search = $connection->get("search/tweets", ['q'=> $entity->getValue(), 'count' => 200]);
+                    break;
+                case 2: // hashtag
+                    $search = $connection->get("search/tweets", ['q'=> "#".$entity->getValue(), 'count' => 200]);
+                    break;
+                case 3: // user
+                    $search = $connection->get("statuses/user_timeline", ['screen_name'=> $entity->getValue(), 'count' => 200]);
+                    break;
+            }
+        }
+
         return $this->render('TwitAppBundle:Wall:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
+            'search'      => $search,
         ));
     }
 
