@@ -73,7 +73,7 @@ doctrine:
 swiftmailer:
     transport: gmail
     username:  villers.mickael@gmail.com
-    password:  en7m75zj
+    password:  ****
 
 
 # braincrafted_bootstrap Configuration
